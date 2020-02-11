@@ -4,27 +4,24 @@ const Schema = mongoose.Schema;
 const ArticleSchema = new Schema({
     headline: {
         type: String,
-        trim: true,
-        required: "Must pass a String vaule for headline"
+        require: true,
+        // required: "Must pass a String vaule for headline"
     },
-    link: {
+    url: {
         type: String,
-        required: "Must pass a String vaule for link"
+        require:true,
+        // required: "URL is required"
     },
-    // date: {
-    //     type: Date,
-    //     default: Date.now()
-    // },
-    // isDrafe: {
-    //     type: Boolean,
-    //     default: true
-    // },
-    // comments: {
-    //     type: [Schema.Types.String], //array
-    //     default: []
-
-    // }
+//  summary:{
+//      type:String,
+//      require:true
+//  },
+//  saved:{
+//      type:Boolean,
+//      default:false
+//  }
 })
+
 const Article = mongoose.model("Article", ArticleSchema)
 
 module.exports = Article
