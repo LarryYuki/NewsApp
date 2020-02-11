@@ -4,13 +4,13 @@ $(document).ready(function() {
 
 // app.get("/", (req, res) => res.render("index"));
 $("#getbutton").on("click", () => {
-     const articlestitle = $("#").val();
+     const allarticles = $("#").val();
   
     $.ajax({
       method: "POST",
       url: "/api",
       data: {
-         articlestitle: articlestitle
+         allarticles: allarticles
       }
     }).then(res => {
       console.log(res);
@@ -29,7 +29,7 @@ renderAll = () => {
             <div class="card-body pt-4">
               <div class="text-center">
                 <p class="card-text">
-                  ${element.articlestitle}
+                  ${element.allarticles}
                 </p>
               </div>
             </div>

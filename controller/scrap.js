@@ -18,30 +18,33 @@ connection.once("open", () => {
     console.log("----------------".rainbow);
 });
 
-db.Article.find({}).then(data => console.log("?", data))
+// db.Article.find({}).then(data => console.log("?", data))
 axios.get("https://www.sfchronicle.com/local/todayspaper/").then(urlResponse => {
     let $ = cheerio.load(urlResponse.data)
 
-    let inserted = 0
+    // let inserted = 0
     $("li.hc_more_item").each((i, element) => {
         const Url = $(element) 
             .find("a")
-            .attr("href")
-            
+         .attr("href")
+            const link=`https://www.sfchronicle.com/`+Url
         const title = $(element) 
             .find("a")
             .text()
         console.log(title, "\n");
-        console.log(Url);
+        console.log(link);
     
         console.log("---------------\n".rainbow);
         
-         inserted++
-         db.Article.create({
+        //  inserted++
+         db.Article.insertMany({
        title:title,
         //  summary: summary,
-         Url:Url
-                }).then(success => console.log(success))
+         Url:link
+                }).then()
+                    // success => 
+                    // console.log(success)
+                    // )
                  .catch(err => console.error(err))
     })
     //  console.log(inserted, " records inserted")
