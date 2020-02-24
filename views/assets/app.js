@@ -4,32 +4,31 @@ $(document).ready(function() {
 
 // app.get("/", (req, res) => res.render("index"));
 $("#getbutton").on("click", () => {
-     const allarticles = $("#articleList").val();
-  
+    //  const allarticles = $("#articleList").val();
     $.ajax({
-      method: "POST",
-      url: "/api",
-      data: {
-         allarticles: allarticles
-      }
-    }).then(res => {
-      console.log(res);
+      method: "GET",
+      url: "/scrape",
+      // data: {
+      //    allarticles: allarticles
+      // }
+    }).then(data => {
+      console.log(data);
       renderAll();
     });
   });
 renderAll = () => {
     $.ajax({
       method: "GET",
-      url: "/api"
-    }).then(res => {
+      url: "/articles"
+    }).then(articles => {
       $("new-container").empty();
-      res.map(element => {
+      articles.map(res => {
         $("new-container").append(
           `<div class="card mt-2">
             <div class="card-body pt-4">
               <div class="text-center">
                 <p class="card-text">
-                  ${element.allarticles}
+                  ${res.title}
                 </p>
               </div>
             </div>
