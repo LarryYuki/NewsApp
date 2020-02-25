@@ -20,9 +20,9 @@ renderAll = () => {
     $.ajax({
       method: "GET",
       url: "/articles"
-    }).then(articles => {
+    }).then(Articles => {
       $("new-container").empty();
-      articles.map(res => {
+      Articles.map(res => {
         $("new-container").append(
           `<div class="card mt-2">
             <div class="card-body pt-4">
