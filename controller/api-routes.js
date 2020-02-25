@@ -11,7 +11,7 @@ const connection = mongoose.connection
 const db = require("../models")
 console.log(connection)
 
-mongoose.connect("mongodb://localhost/newScraper", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/newScraper", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
