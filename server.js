@@ -4,7 +4,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const colors = require("colors");
 const connection = mongoose.connection;
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.urlencoded({
     extended: true
