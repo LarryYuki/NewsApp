@@ -3,23 +3,24 @@ $(document).ready(function() {
 });
 
 // app.get("/", (req, res) => res.render("index"));
-$("#getbutton").on("click", () => {
+$("#getbutton").on("click", (e) => {
+  e.preventDefault();
     //  const allarticles = $("#articleList").val();
     $.ajax({
       method: "GET",
-      url: "/scrape",
+      url: "api/scrape",
       // data: {
       //    allarticles: allarticles
       // }
     }).then(data => {
-      console.log(data);
       renderAll();
+      console.log(data);
     });
   });
 renderAll = () => {
     $.ajax({
       method: "GET",
-      url: "/articles"
+      url: "api/articles"
     }).then(Articles => {
       $("new-container").empty();
       Articles.map(res => {

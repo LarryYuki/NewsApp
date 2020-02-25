@@ -11,6 +11,9 @@ app.use(express.urlencoded({
 }));
 app.use(express.json()); 
 
+app.use(express.static("./views"));
+app.set('views', __dirname + '/views');
+
 mongoose.connect("mongodb://localhost/newScraper", { 
     useNewUrlParser: true,
     useUnifiedTopology: true
