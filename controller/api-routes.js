@@ -23,9 +23,10 @@ connection.once("open", () => {
 // db.Article.find({}).then(data => console.log("?", data))
 router.get("/scrape", (req,res)=>{
 
-axios.get("https://www.sfchronicle.com/local/todayspaper/").then(urlResponse => {
-    let $ = cheerio.load(urlResponse.data)
-   let data={};
+    axios.get("https://www.sfchronicle.com/local/todayspaper/").then(urlResponse => {
+        let $ = cheerio.load(urlResponse.data)
+        let data={};
+        let dataArr = [];
 
     $("li.hc_more_item").each((i, element) => {
         const Url = $(element) 
@@ -35,10 +36,16 @@ axios.get("https://www.sfchronicle.com/local/todayspaper/").then(urlResponse => 
         const title = $(element) 
             .find("a")
             .text()
+            // dataArr.push(title)
+            // console.log(dadaArr); 
         console.log(title, "\n");
         console.log(link);
         console.log("---------------\n".rainbow);
+       dataArr.push({title, Url})
 
+       console.log(dataArr)
+       res.send(dataArr)
+       
         let entry = new Article(data)
         Article.find({
             title:data.title
@@ -52,13 +59,12 @@ axios.get("https://www.sfchronicle.com/local/todayspaper/").then(urlResponse => 
                     }
                     else {
                         console.log(doc);
+                    }
+                })
             }
-        })
-    }
-});
-res.send('All articles')     
-});
-});
+        });     
+        });
+    });
 });
 router.get("/articles", (req, res) => {
     Article.find({ "saved": false }, (error, doc) => {
